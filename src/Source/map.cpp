@@ -41,18 +41,28 @@
 //     return grid[x][y] != '#';
 // }
 #include "map.h"
-#include "ghost.h" // Now safe to include
+#include "ghost.h"
 
-void Map::render(const Pacman &player, const Ghost &ghost) const {
-    for (int i = 0; i < 10; i++) {
+void Map::render(const Pacman &player, const std::vector<Ghost*>& ghosts) const {
+    for (int i = 0; i < 10; i++) {  // Use fixed 10x10 size
         for (int j = 0; j < 10; j++) {
-            if (player.getX() == i && player.getY() == j)
-                std::cout << 'P';  // Render Pac-Man
-            else if (ghost.getX() == i && ghost.getY() == j)
-                std::cout << 'G';  // Render Ghost
-            else
-                std::cout << grid[i][j];
+            if (i == player.getX() && j == player.getY()) {
+                std::cout << "P";  // Pac-Man
+            } else {
+                bool ghostPrinted = false;
+                for (const auto& ghost : ghosts) {
+                    if (i == ghost->getX() && j == ghost->getY()) {
+                        std::cout << "G";  // 👻 Print ghost
+                        ghostPrinted = true;
+                        break;  // Don't check other ghosts
+                    }
+                }
+                if (!ghostPrinted) {
+                    std::cout << grid[i][j];  // Render map
+                }
+            }
         }
-        std::cout << std::endl;
+        std::cout << "\n";
     }
 }
+
