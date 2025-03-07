@@ -118,6 +118,8 @@
 //     gameLoop();
 //     return 0;
 // }
+
+
 #include <iostream>
 #include <conio.h>  // Windows keyboard input
 #include <thread>
@@ -140,21 +142,25 @@ void gameLoop() {
     Map gameMap;
     Pacman player(1, 1);
 
-    // 🏴‍☠️ Create multiple ghosts
     std::vector<Ghost*> ghosts;
     ghosts.push_back(GhostFactory::createGhost(5, 5, 0)); // Chasing ghost
     ghosts.push_back(GhostFactory::createGhost(8, 8, 1)); // Random ghost
 
     hideCursor();  // Hide cursor
 
-    int ghostSpeed = 2;  // 👻 Ghost moves every 2 player moves
-    int moveCounter = 0;  // Counter for ghost movement delay
+    int ghostSpeed = 2;
+    int moveCounter = 0;
+
+    std::string lastRenderedMap = "";  // Store last rendered map
 
     while (true) {
-        system(CLEAR_SCREEN);  // Clear screen efficiently
+        std::string currentMap = gameMap.getRenderedMap(player, ghosts);
 
-        // ✅ Render Pacman and ALL ghosts
-        gameMap.render(player, ghosts);
+        if (currentMap != lastRenderedMap) {  // Only redraw if map changed
+            std::cout << "\033[H";  // Move cursor to the top (Unix escape code)
+            std::cout << currentMap;
+            lastRenderedMap = currentMap;
+        }
 
         if (_kbhit()) {
             char input = _getch();
@@ -170,9 +176,9 @@ void gameLoop() {
             }
         }
 
-        moveCounter++;  // 🏎️ Count player moves
+        moveCounter++;
 
-        if (moveCounter % ghostSpeed == 0) {  // 👻 Slow down ghost movement
+        if (moveCounter % ghostSpeed == 0) {
             for (auto ghost : ghosts) {
                 ghost->move(gameMap, player.getX(), player.getY());
             }
