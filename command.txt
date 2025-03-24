@@ -1,0 +1,1 @@
+g++ -o Pacman src/source/*.cpp -I src/header -std=c++11
