@@ -33,10 +33,6 @@ ghosts.clear();
 void GameManager::runGameLoop() {
     Map gameMap;
     Pacman player(1, 1);
-
-    // std::vector<Ghost*> ghosts;
-    // ghosts.push_back(GhostFactory::createGhost(5, 5, 0)); // Chasing ghost
-    // ghosts.push_back(GhostFactory::createGhost(8, 8, 1)); // Random ghost
     GameManager game;  // Create GameManager instance
 
     hideCursor();  // Hide cursor
