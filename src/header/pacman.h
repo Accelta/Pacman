@@ -8,14 +8,21 @@ class Map; // Forward declaration
 class Pacman {
 private:
     int x, y;
+    int score;
 
 public:
-    Pacman(int startX, int startY) : x(startX), y(startY) {}
+    Pacman(int startX, int startY) : x(startX), y(startY), score(0) {}
 
     int getX() const { return x; }
     int getY() const { return y; }
+    int getScore() const { return score; }
 
     void move(int dx, int dy, const Map &gameMap);
+    
+    void eatPellet(char tile) {
+        if (tile == '.') score += 10; // Normal pellet
+        else if (tile == '*') score += 50; // Power pellet
+    }
 };
 
 #endif

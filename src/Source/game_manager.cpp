@@ -7,6 +7,7 @@
 #include "map.h"
 #include "pacman.h"
 #include "ghost_factory.h"
+#include "frightened_state.h"
 
 #ifdef _WIN32
     #define CLEAR_SCREEN "cls"
@@ -14,8 +15,8 @@
     #define CLEAR_SCREEN "clear"
 #endif
 
-void hideCursor() { std::cout << "\e[?25l"; }
-void showCursor() { std::cout << "\e[?25h"; }
+void hideCursor() { std::cout << "\e[?25l]"; }
+void showCursor() { std::cout << "\e[?25h]"; }
 
 GameManager::GameManager() : player(5, 5) { // Initialize Pacman at (5,5)
     ghosts.push_back(GhostFactory::createGhost(BLINKY, 3, 3));
@@ -46,7 +47,7 @@ void GameManager::runGameLoop() {
         std::string currentMap = gameMap.getRenderedMap(player, game.getGhosts());
 
         if (currentMap != lastRenderedMap) {  // Only redraw if map changed
-            std::cout << "\033[H";  // Move cursor to the top (Unix escape code)
+            std::cout << "\033[H]";  // Move cursor to the top (Unix escape code)
             std::cout << currentMap;
             lastRenderedMap = currentMap;
         }
@@ -63,6 +64,11 @@ void GameManager::runGameLoop() {
                 game.getGhosts().clear();
                     showCursor();
                     return;
+            }
+        }
+        if (gameMap.getTile(player.getX(), player.getY()) == '*') {
+            for (Ghost* ghost : ghosts) {
+                ghost->changeState(new FrightenedState());
             }
         }
 

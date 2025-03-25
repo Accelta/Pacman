@@ -5,8 +5,8 @@
 std::string Map::getRenderedMap(const Pacman &player, const std::vector<Ghost*>& ghosts) const {
     std::ostringstream buffer;  // Store the map as a string
 
-    for (int i = 0; i < 10; i++) {
-        for (int j = 0; j < 10; j++) {
+    for (int i = 0; i < 10; ++i) {
+        for (int j = 0; j < 10; ++j) {
             if (i == player.getX() && j == player.getY()) {
                 buffer << 'P';  // Pac-Man
             } else {
