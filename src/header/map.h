@@ -32,9 +32,7 @@ public:
             const_cast<Map*>(this)->grid[x][y] = ' '; // Remove the pellet
         }
     }
-
-    // FIX: Use forward-declared Ghost instead of including its header
-    // void render(const Pacman &player, const std::vector<Ghost*>& ghosts) const;
+    
     std::string getRenderedMap(const Pacman& player, const std::vector<Ghost*>& ghosts) const;
 
 };

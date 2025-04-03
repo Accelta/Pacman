@@ -28,6 +28,6 @@ void Ghost::move(const Pacman &pacman, const Map &gamemap){
 }
 
 void Ghost::changeState(GhostState *newstate){
-    delete state;
+    if (state) delete state;
     state = newstate;
 }
