@@ -38,7 +38,7 @@ void Ghost::updateState() {
         delete state;
         state = previouseState ? previouseState : new WanderState();
         previouseState = nullptr;
-        std::cout << "Frightened state ended. Ghost reverted.\n";
+        // std::cout << "Frightened state ended. Ghost reverted.\n";
     }
 }
 

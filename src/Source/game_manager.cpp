@@ -74,7 +74,7 @@ void GameManager::runGameLoop() {
                     gameMap.eatPellet(newX, newY);
 
                     if (tile == '*') {
-                        std::cout << "\nPac-Man ate a power pellet! Ghosts are frightened!\n";
+                        // std::cout << "\nPac-Man ate a power pellet! Ghosts are frightened!\n";
                         frightenedStart = std::chrono::steady_clock::now();
                         isFrightened = true;
                         for (Ghost* ghost : ghosts) {
@@ -90,7 +90,7 @@ void GameManager::runGameLoop() {
             auto now = std::chrono::steady_clock::now();
             auto duration = std::chrono::duration_cast<std::chrono::seconds>(now - frightenedStart).count();
             if (duration >= 5) {
-                std::cout << "\nFrightened state ended. Ghosts returning to previous states.\n";
+                // std::cout << "\nFrightened state ended. Ghosts returning to previous states.\n";
                 for (Ghost* ghost : ghosts) {
                     ghost->updateState();  // Revert to previous state
                 }
