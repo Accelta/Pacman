@@ -8,12 +8,14 @@ std::string Map::getRenderedMap(const Pacman &player, const std::vector<Ghost*>&
     for (int i = 0; i < 10; ++i) {
         for (int j = 0; j < 10; ++j) {
             if (i == player.getX() && j == player.getY()) {
-                buffer << 'P';  // Pac-Man
+                // buffer << 'P';  
+                buffer << "\033[33mP\033[0m";// Pac-Man
             } else {
                 bool ghostPrinted = false;
                 for (const auto& ghost : ghosts) {
                     if (i == ghost->getX() && j == ghost->getY()) {
-                        buffer << 'G';  // Ghost
+                        // buffer << 'G';
+                        buffer << ghost->getSymbol();  // Ghost
                         ghostPrinted = true;
                         break;  // Skip other ghosts at this position
                     }

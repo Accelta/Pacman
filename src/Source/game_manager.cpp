@@ -108,7 +108,7 @@
 void hideCursor() { std::cout << "\e[?25l"; }
 void showCursor() { std::cout << "\e[?25h"; }
 
-GameManager::GameManager() : player(5, 5) { // Initialize Pacman at (5,5)
+GameManager::GameManager() : player(5, 5), isFrightened(false) {
     ghosts.push_back(GhostFactory::createGhost(BLINKY, 3, 3));
     ghosts.push_back(GhostFactory::createGhost(PINKY, 7, 7));
 }
@@ -122,16 +122,16 @@ GameManager::~GameManager() {
 
 void GameManager::runGameLoop() {
     Map gameMap;
-    hideCursor();  // Hide cursor
+    hideCursor();
 
     int ghostSpeed = 2;
     int moveCounter = 0;
-    std::string lastRenderedMap = "";  // Store last rendered map
+    std::string lastRenderedMap = "";
 
     while (true) {
         std::string currentMap = gameMap.getRenderedMap(player, ghosts);
 
-        if (currentMap != lastRenderedMap) {  // Only redraw if map changed
+        if (currentMap != lastRenderedMap) {
             std::cout << "\033[H";  
             std::cout << currentMap;
             lastRenderedMap = currentMap;
@@ -146,32 +146,45 @@ void GameManager::runGameLoop() {
                 case 's': dx = 1; break;
                 case 'a': dy = -1; break;
                 case 'd': dy = 1; break;
-                case 'x': 
+                case 'x':
                     for (Ghost* ghost : ghosts) delete ghost;
                     ghosts.clear();
                     showCursor();
                     return;
             }
 
-            // Only move if it's a valid position
             if (dx != 0 || dy != 0) {
                 int newX = player.getX() + dx;
                 int newY = player.getY() + dy;
 
                 if (gameMap.isValidMove(newX, newY)) {
                     char tile = gameMap.getTile(newX, newY);
-                    player.move(dx, dy, gameMap); // Fix: Use relative movement
+                    player.move(dx, dy, gameMap);
                     player.eatPellet(tile);
                     gameMap.eatPellet(newX, newY);
 
-                    // If Pac-Man eats a power pellet, change ghost states
                     if (tile == '*') {
                         std::cout << "\nPac-Man ate a power pellet! Ghosts are frightened!\n";
+                        frightenedStart = std::chrono::steady_clock::now();
+                        isFrightened = true;
                         for (Ghost* ghost : ghosts) {
                             ghost->changeState(new FrightenedState());
                         }
                     }
                 }
+            }
+        }
+
+        // Handle frightened state timing
+        if (isFrightened) {
+            auto now = std::chrono::steady_clock::now();
+            auto duration = std::chrono::duration_cast<std::chrono::seconds>(now - frightenedStart).count();
+            if (duration >= 5) {
+                std::cout << "\nFrightened state ended. Ghosts returning to previous states.\n";
+                for (Ghost* ghost : ghosts) {
+                    ghost->updateState();  // Revert to previous state
+                }
+                isFrightened = false;
             }
         }
 
@@ -187,3 +200,4 @@ void GameManager::runGameLoop() {
         std::this_thread::sleep_for(std::chrono::milliseconds(200));  // Control FPS
     }
 }
+
