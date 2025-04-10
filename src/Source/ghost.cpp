@@ -4,6 +4,7 @@
 #include "chase_state.h"
 #include "return_to_base_state.h"
 #include "wander_state.h"
+#include "pacman.h"
 
 Ghost::Ghost(int startX, int startY, GhostState* initialState)
     : x(startX), y(startY), state(initialState), previouseState(nullptr) {}
@@ -47,4 +48,29 @@ std::string Ghost::getSymbol() {
     if (dynamic_cast<ChaseState*>(state)) return "\033[31mG\033[0m";     // Red
     if (dynamic_cast<ReturnToBaseState*>(state)) return "\033[37mG\033[0m"; // White
     return "\033[35mG\033[0m"; // Default Purple (Wander)
+}
+
+void Ghost::checkChase(const Pacman& pacman) {
+    if (dynamic_cast<FrightenedState*>(state)) return;
+
+    int dx = abs(pacman.getX() - x);
+    int dy = abs(pacman.getY() - y);
+
+    if (!isChasing && dx + dy <= 3) {  // Manhattan distance ≤ 3
+        isChasing = true;
+        chaseStartTime = std::chrono::steady_clock::now();
+        changeState(new ChaseState());
+    }
+}
+
+void Ghost::updateChaseState() {
+    if (isChasing) {
+        auto now = std::chrono::steady_clock::now();
+        auto elapsed = std::chrono::duration_cast<std::chrono::seconds>(now - chaseStartTime).count();
+
+        if (elapsed >= 5) {
+            isChasing = false;
+            changeState(new WanderState());
+        }
+    }
 }
