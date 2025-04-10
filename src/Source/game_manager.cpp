@@ -111,7 +111,7 @@ void GameManager::runGameLoop() {
             }
         }
 
-        std::cout << "\nScore: " << player.getScore() << std::endl;
+        // std::cout << "\nScore: " << player.getScore() << std::endl;
         std::this_thread::sleep_for(std::chrono::milliseconds(200));  // Control FPS
     }
 }
