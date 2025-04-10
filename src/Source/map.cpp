@@ -4,6 +4,7 @@
 
 std::string Map::getRenderedMap(const Pacman &player, const std::vector<Ghost*>& ghosts) const {
     std::ostringstream buffer;  // Store the map as a string
+    buffer << "Score: " << player.getScore() << "\n\n";
 
     for (int i = 0; i < 20; ++i) {
         for (int j = 0; j < 20; ++j) {

@@ -19,8 +19,8 @@ void hideCursor() { std::cout << "\e[?25l"; }
 void showCursor() { std::cout << "\e[?25h"; }
 
 GameManager::GameManager() : player(5, 5), isFrightened(false) {
-    ghosts.push_back(GhostFactory::createGhost(PINKY, 3, 3));
-    ghosts.push_back(GhostFactory::createGhost(PINKY, 7, 7));
+    ghosts.push_back(GhostFactory::createGhost(PINKY, 10, 5));
+    ghosts.push_back(GhostFactory::createGhost(PINKY, 11, 8));
 }
 
 GameManager::~GameManager() {
