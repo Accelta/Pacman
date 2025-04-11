@@ -30,6 +30,8 @@ public:
     void updateChaseState();
     bool isInChaseState() const { return isChasing; }
     std::string getSymbol();
+    bool isFrightened() const;
+void sendToBase();
 };
 
 #endif

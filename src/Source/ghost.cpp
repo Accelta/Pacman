@@ -74,3 +74,12 @@ void Ghost::updateChaseState() {
         }
     }
 }
+
+bool Ghost::isFrightened() const {
+    return dynamic_cast<FrightenedState*>(state) != nullptr;
+}
+
+void Ghost::sendToBase() {
+    if (state) delete state;
+    state = new ReturnToBaseState();
+}

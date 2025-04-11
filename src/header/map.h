@@ -35,7 +35,7 @@ char grid[20][20] = {
 public:
     Map() {} // Explicit constructor
 
-    bool isValidMove(int x, int y) const { return grid[x][y] == ' '|| grid[x][y] == '.' || grid[x][y] == '*'; }
+    bool isValidMove(int x, int y) const { return grid[x][y] == ' '|| grid[x][y] == '.' || grid[x][y] == '*' || grid[x][y] == 'B'; }
     char getTile(int x, int y) const { return grid[x][y]; }
     void eatPellet(int x, int y) const {
         if (grid[x][y] == '.' || grid[x][y] == '*') {

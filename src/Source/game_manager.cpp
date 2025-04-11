@@ -85,6 +85,20 @@ void GameManager::runGameLoop() {
             }
         }
 
+        for (Ghost* ghost : ghosts) {
+            if (ghost->getX() == player.getX() && ghost->getY() == player.getY()) {
+                if (ghost->isFrightened()) {
+                    ghost->sendToBase();  // Change to ReturnToBaseState
+                    // player.addScore(200); // Reward score for eating ghost
+                    // Optional: print message
+                    // std::cout << "Pac-Man ate a ghost!\n";
+                } else {
+                    // Optional: You could handle Pac-Man getting caught here
+                    // e.g. end game or reduce life
+                }
+            }
+        }
+
         // Handle frightened state timing
         if (isFrightened) {
             auto now = std::chrono::steady_clock::now();
