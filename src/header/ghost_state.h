@@ -25,6 +25,7 @@ class GhostState {
 public:
     virtual ~GhostState() {}
     virtual void move(Ghost &ghost, const Pacman &pacman, const Map &gameMap) = 0;
+    virtual bool isFrightened() const { return false; }
 };
 
 #endif

@@ -44,7 +44,8 @@ void Ghost::updateState() {
 }
 
 std::string Ghost::getSymbol() {
-    if (dynamic_cast<FrightenedState*>(state)) return "\033[34mG\033[0m"; // Blue
+    // if (dynamic_cast<FrightenedState*>(state)) return "\033[34mG\033[0m"; // Blue
+    if (state->isFrightened()) return "\033[34mG\033[0m";
     if (dynamic_cast<ChaseState*>(state)) return "\033[31mG\033[0m";     // Red
     if (dynamic_cast<ReturnToBaseState*>(state)) return "\033[37mG\033[0m"; // White
     return "\033[35mG\033[0m"; // Default Purple (Wander)

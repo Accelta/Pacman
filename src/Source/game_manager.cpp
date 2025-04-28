@@ -8,6 +8,7 @@
 #include "pacman.h"
 #include "ghost_factory.h"
 #include "frightened_state.h"
+#include "fast_frightened_decorator.h"
 
 #ifdef _WIN32
     #define CLEAR_SCREEN "cls"
@@ -78,7 +79,8 @@ void GameManager::runGameLoop() {
                         frightenedStart = std::chrono::steady_clock::now();
                         isFrightened = true;
                         for (Ghost* ghost : ghosts) {
-                            ghost->changeState(new FrightenedState());
+                            // ghost->changeState(new FrightenedState());
+                            ghost->changeState(new FastFrightenedDecorator(new FrightenedState()));
                         }
                     }
                 }

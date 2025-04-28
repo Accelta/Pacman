@@ -6,6 +6,7 @@
 class FrightenedState : public GhostState {
 public:
     void move(Ghost &ghost, const Pacman &pacman, const Map &gameMap) override;
+    bool isFrightened() const override { return true; }
 };
 
 #endif
