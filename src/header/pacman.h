@@ -18,12 +18,8 @@ public:
     int getScore() const { return score; }
 
     void move(int dx, int dy, const Map &gameMap);
-    
-    // void eatPellet(char tile) {
-    //     if (tile == '.') score += 10; // Normal pellet
-    //     else if (tile == '*') score += 50; // Power pellet
-    // }
     void eatPellet(char tile);
+    void addscore(int amount);
 };
 
 #endif

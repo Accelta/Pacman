@@ -114,10 +114,11 @@ void GameManager::runGameLoop() {
                 isFrightened = false;
             }
         }
-
         for (Ghost* ghost : ghosts) {
-            ghost->checkChase(player);      // Check if Pac-Man is nearby
-            ghost->updateChaseState();      // Revert to wander after 5s if needed
+            if (!ghost->isReturning()) {  // <--- Skip if in ReturnToBaseState
+                ghost->checkChase(player);      
+                ghost->updateChaseState();      
+            }
         }
         
         moveCounter++;

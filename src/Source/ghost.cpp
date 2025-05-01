@@ -80,6 +80,10 @@ bool Ghost::isFrightened() const {
     return state && state->isFrightened();
 }
 
+bool Ghost::isReturning() const {
+    return state && dynamic_cast<ReturnToBaseState*>(state);
+}
+
 void Ghost::sendToBase() {
     if (state) delete state;
     state = new ReturnToBaseState();

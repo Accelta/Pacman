@@ -15,3 +15,7 @@ void Pacman::eatPellet(char tile){
     else if (tile == '*') score += 50; // Power pellet
     // Add more conditions for other types of pellets if needed
 }
+
+void Pacman::addscore(int amount) {
+    this->score += amount;
+}
