@@ -31,7 +31,7 @@ public:
     bool isInChaseState() const { return isChasing; }
     std::string getSymbol();
     bool isFrightened() const;
-void sendToBase();
+    void sendToBase();
 };
 
 #endif
