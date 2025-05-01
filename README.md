@@ -17,8 +17,6 @@ Versi sederhana dari game **Pac-Man** yang berjalan di terminal dengan karakter 
 - Pac-Man bisa memakan ghost saat mereka dalam keadaan ketakutan
 - Ghost yang ketakutan bisa diberi kemampuan ekstra dengan **Decorator Pattern** (misalnya: jalan lebih cepat)
 
-## 🧱 Struktur Proyek
-Pacman/ │ ├── src/ │ ├── header/ │ │ ├── ghost.h │ │ ├── pacman.h │ │ ├── map.h │ │ ├── game_manager.h │ │ ├── ghost_state.h │ │ ├── frightened_state.h │ │ ├── chase_state.h │ │ ├── wander_state.h │ │ ├── return_to_base_state.h │ │ └── ghost_decorator.h │ │ │ ├── source/ │ │ ├── ghost.cpp │ │ ├── pacman.cpp │ │ ├── map.cpp │ │ ├── game_manager.cpp │ │ ├── main.cpp │ │ ├── frightened_state.cpp │ │ ├── chase_state.cpp │ │ ├── return_to_base_state.cpp │ │ ├── wander_state.cpp │ │ └── ghost_decorator.cpp │ └── README.md
 ## ⚙️ Cara Menjalankan
 
 1. **Kompilasi** program (gunakan `g++`, `clang++`, atau build system seperti `CMake`):
