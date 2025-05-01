@@ -96,8 +96,8 @@ void GameManager::runGameLoop() {
                     // Optional: print message
                     // std::cout << "Pac-Man ate a ghost!\n";
                 } else {
-                    // Optional: You could handle Pac-Man getting caught here
-                    // e.g. end game or reduce life
+                    // std::cout << "\nPacman was caught by a ghost! Game Over!\n";
+                    // showCursor();
                 }
             }
         }
