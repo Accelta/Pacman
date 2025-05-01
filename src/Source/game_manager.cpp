@@ -115,7 +115,7 @@ void GameManager::runGameLoop() {
             }
         }
         for (Ghost* ghost : ghosts) {
-            if (!ghost->isReturning()) {  // <--- Skip if in ReturnToBaseState
+            if (!ghost->isReturning()|| ghost->isFrightened()) {  
                 ghost->checkChase(player);      
                 ghost->updateChaseState();      
             }
