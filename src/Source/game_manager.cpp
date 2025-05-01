@@ -71,7 +71,7 @@ void GameManager::runGameLoop() {
                 if (gameMap.isValidMove(newX, newY)) {
                     char tile = gameMap.getTile(newX, newY);
                     player.move(dx, dy, gameMap);
-                    player.eatPellet(tile);
+                    // player.eatPellet(tile);
                     gameMap.eatPellet(newX, newY);
 
                     if (tile == '*') {

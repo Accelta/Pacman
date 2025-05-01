@@ -6,7 +6,7 @@ void Pacman::move(int dx, int dy, const Map &gameMap) {
         x += dx;
         y += dy;
         char tile = gameMap.getTile(x, y);
-        // eatPellet(tile);
+        eatPellet(tile);
         gameMap.eatPellet(x, y);
     }
     
