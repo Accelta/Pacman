@@ -35,7 +35,7 @@ void Ghost::changeState(GhostState* newState) {
 }
 
 void Ghost::updateState() {
-    if (dynamic_cast<FrightenedState*>(state)) {
+    if (state && state->isFrightened()) {
         delete state;
         state = previouseState ? previouseState : new WanderState();
         previouseState = nullptr;
