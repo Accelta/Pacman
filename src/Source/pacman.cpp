@@ -6,9 +6,12 @@ void Pacman::move(int dx, int dy, const Map &gameMap) {
         x += dx;
         y += dy;
         char tile = gameMap.getTile(x, y);
-        eatPellet(tile);
         gameMap.eatPellet(x, y);
     }
-    
-    
+}
+
+void Pacman::eatPellet(char tile){
+    if (tile == '.') score += 10; // Normal pellet
+    else if (tile == '*') score += 50; // Power pellet
+    // Add more conditions for other types of pellets if needed
 }

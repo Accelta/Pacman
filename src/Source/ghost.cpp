@@ -77,7 +77,7 @@ void Ghost::updateChaseState() {
 }
 
 bool Ghost::isFrightened() const {
-    return dynamic_cast<FrightenedState*>(state) != nullptr;
+    return state && state->isFrightened();
 }
 
 void Ghost::sendToBase() {

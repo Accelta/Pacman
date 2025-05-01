@@ -71,7 +71,7 @@ void GameManager::runGameLoop() {
                 if (gameMap.isValidMove(newX, newY)) {
                     char tile = gameMap.getTile(newX, newY);
                     player.move(dx, dy, gameMap);
-                    // player.eatPellet(tile);
+                    player.eatPellet(tile);  // Update score based on tile type
                     gameMap.eatPellet(newX, newY);
 
                     if (tile == '*') {
@@ -92,6 +92,7 @@ void GameManager::runGameLoop() {
                 if (ghost->isFrightened()) {
                     ghost->sendToBase();  // Change to ReturnToBaseState
                     // player.addScore(200); // Reward score for eating ghost
+                    
                     // Optional: print message
                     // std::cout << "Pac-Man ate a ghost!\n";
                 } else {
