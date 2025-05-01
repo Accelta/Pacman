@@ -21,7 +21,7 @@ Versi sederhana dari game **Pac-Man** yang berjalan di terminal dengan karakter 
 
 1. **Kompilasi** program (gunakan `g++`, `clang++`, atau build system seperti `CMake`):
    ```bash
-   g++ -std=c++17 src/source/*.cpp -o Pacman
+   g++ -o Pacman src/source/*.cpp -I src/header -std=c++11
 Jalankan dari terminal:
 bash
 ./Pacman
