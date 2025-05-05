@@ -91,7 +91,7 @@ void GameManager::runGameLoop() {
             if (ghost->getX() == player.getX() && ghost->getY() == player.getY()) {
                 if (ghost->isFrightened()) {
                     ghost->sendToBase();  // Change to ReturnToBaseState
-                    // player.addScore(200); // Reward score for eating ghost
+                    player.addscore(200); // Reward score for eating ghost
                     
                     // Optional: print message
                     // std::cout << "Pac-Man ate a ghost!\n";
